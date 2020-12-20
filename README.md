@@ -1,2 +1,2 @@
-# promozii
-A web component promotion bar
+# PromoBar
+A web component to display promotions for an online store
