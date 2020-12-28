@@ -7,6 +7,11 @@
         background: #fafafa;
         margin: 0;
       }
+
+      a {
+        color: lightblue;
+        text-decoration: underline;
+      }
     </style>
   </head>
   <body>
@@ -19,8 +24,12 @@
       render(
         html`
           <promo-bar>
-            <span>First Promotional Message</span>
+            <span class="slideClass"
+              >First Promotional Message
+              <a>Test Link</a>
+            </span>
             <span>Second Promotional Message</span>
+            <span>Third Promotional Message</span>
           </promo-bar>
         `,
         document.querySelector('#demo')
