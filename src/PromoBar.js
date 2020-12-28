@@ -12,7 +12,7 @@ export class PromoBar extends LitElement {
       }
       .carousel {
         position: relative;
-        height: 50px;
+        height: var(--promo-bar-height, 60px);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -20,30 +20,56 @@ export class PromoBar extends LitElement {
       }
       .actions {
         position: absolute;
-        width: 100vw;
+        width: 100%;
         display: flex;
         justify-content: space-between;
         top: 50%;
         transform: translateY(-50%);
       }
       .arrow {
-        background: #ddd;
+        background: transparent;
         border-radius: 50%;
         padding: 6px 12px;
         border: none;
         cursor: pointer;
+        color: var(--arrow-color, white);
+        font-size: 1.5rem;
       }
       .prev {
         margin-left: 20px;
+        animation: slideArrowLeft 0.5s ease-in infinite alternate;
       }
       .next {
         margin-right: 20px;
+        animation: slideArrowRight 0.5s ease-in infinite alternate;
       }
       ::slotted(.slide) {
-        display: none;
+        position: absolute;
+        transition: all 0.5s ease;
+        opacity: 0;
       }
       ::slotted(.slide.showing) {
-        display: block;
+        opacity: 1;
+      }
+
+      @keyframes slideArrowRight {
+        from {
+          transform: translateX(0);
+        }
+
+        to {
+          transform: translateX(5px);
+        }
+      }
+
+      @keyframes slideArrowLeft {
+        from {
+          transform: translateX(0);
+        }
+
+        to {
+          transform: translateX(-5px);
+        }
       }
     `;
   }
@@ -51,7 +77,6 @@ export class PromoBar extends LitElement {
   static get properties() {
     return {
       showButtons: { type: Boolean },
-      circularButtons: { type: Boolean },
     };
   }
 
@@ -60,15 +85,35 @@ export class PromoBar extends LitElement {
     // init
     this._slidePosition = 0;
     this._totalSlides;
+    this._intervalId;
 
     // default config
     this.showButtons = true;
-    this.circularButtons = true;
+    this.autoCycle = true;
 
     // config attr
     if (this.hasAttribute('hideButtons')) {
       this.showButtons = false;
     }
+
+    if (this.hasAttribute('autoCycleOff')) {
+      this.autoCycle = false;
+    }
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+    const that = this;
+    if (this.autoCycle) {
+      this._intervalId = setInterval(function () {
+        that.shadowRoot.querySelector('.next').click();
+      }, 3000);
+    }
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    clearInterval(this._intervalId);
   }
 
   handleSlotChange(e) {
@@ -87,12 +132,11 @@ export class PromoBar extends LitElement {
 
   changeSlidePosition(e) {
     if (e.target.classList.contains('next')) {
-      // next slide
+      // next button clicked, increase slide position else set to 0 to restart
       this._slidePosition === this._totalSlides - 1
         ? (this._slidePosition = 0)
         : (this._slidePosition += 1);
     } else {
-      // prev slide
       this._slidePosition === 0
         ? (this._slidePosition = this._totalSlides - 1)
         : (this._slidePosition -= 1);
@@ -103,7 +147,9 @@ export class PromoBar extends LitElement {
   updateNewSlide() {
     const slides = document.querySelectorAll('.slide');
     slides.forEach(ele => {
-      if (ele.classList.contains('showing')) ele.classList.remove('showing');
+      if (ele.classList.contains('showing')) {
+        ele.classList.remove('showing');
+      }
     });
 
     slides[this._slidePosition].classList.add('showing');
@@ -113,7 +159,7 @@ export class PromoBar extends LitElement {
     return html`
       <section class="carousel">
         <slot @slotchange="${this.handleSlotChange}"
-          >Promotion Message Fallback</slot
+          >No slot elements assigned</slot
         >
         ${this.showButtons
           ? html`
