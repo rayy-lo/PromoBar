@@ -3,36 +3,42 @@ import { html, fixture, expect } from '@open-wc/testing';
 import '../promo-bar.js';
 
 describe('PromoBar', () => {
-  it('has a default title "Hey there" and counter 5', async () => {
+  it('assigns the totalSlides variable equal to number of children elements', async () => {
     const el = await fixture(html`
-      <promo-bar></promo-bar>
+      <promo-bar>
+        <span>First Promo Message</span>
+        <span>Second Promo Message</span>
+      </promo-bar>
     `);
 
-    expect(el.title).to.equal('Hey there');
-    expect(el.counter).to.equal(5);
+    expect(el._totalSlides).to.equal(2);
   });
 
-  it('increases the counter on button click', async () => {
+  it('hideButtons attribute on component does not render arrow buttons', async () => {
     const el = await fixture(html`
-      <promo-bar></promo-bar>
+      <promo-bar hideButtons>
+        <span>Test Slot</span>
+      </promo-bar>
     `);
-    el.shadowRoot.querySelector('button').click();
 
-    expect(el.counter).to.equal(6);
+    expect(el.showButtons).to.equal(false);
+    expect(el.shadowRoot.querySelectorAll('.arrow')).not.to.exist;
   });
 
-  it('can override the title via attribute', async () => {
+  it('autoCycleOff attribute on component turns off auto slide change', async () => {
     const el = await fixture(html`
-      <promo-bar title="attribute title"></promo-bar>
+      <promo-bar autoCycleOff>
+        <span>Test Slot</span>
+      </promo-bar>
     `);
 
-    expect(el.title).to.equal('attribute title');
+    expect(el.autoCycle).to.equal(false);
+    // setInterval should not be invoked, thus _intervalId should not exist
+    expect(el._intervalId).to.equal(undefined);
   });
 
   it('passes the a11y audit', async () => {
-    const el = await fixture(html`
-      <promo-bar></promo-bar>
-    `);
+    const el = await fixture(html` <promo-bar></promo-bar> `);
 
     await expect(el).shadowDom.to.be.accessible();
   });
