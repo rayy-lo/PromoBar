@@ -87,6 +87,8 @@ export class PromoBar extends LitElement {
     this._totalSlides;
     this._intervalId;
 
+    console.log(this);
+
     // default config
     this.showButtons = true;
     this.autoCycle = true;
@@ -106,7 +108,7 @@ export class PromoBar extends LitElement {
     const that = this;
     if (this.autoCycle) {
       this._intervalId = setInterval(function () {
-        that.shadowRoot.querySelector('.next').click();
+        that.changeSlidePosition({}, 'next');
       }, 3000);
     }
   }
@@ -130,8 +132,11 @@ export class PromoBar extends LitElement {
     });
   }
 
-  changeSlidePosition(e) {
-    if (e.target.classList.contains('next')) {
+  changeSlidePosition(e, direction) {
+    //invoked from button click
+    if (e.target) direction = e.target.getAttribute('data-direction');
+
+    if (direction === 'next') {
       // next button clicked, increase slide position else set to 0 to restart
       this._slidePosition === this._totalSlides - 1
         ? (this._slidePosition = 0)
@@ -168,6 +173,7 @@ export class PromoBar extends LitElement {
                   @click="${this.changeSlidePosition}"
                   aria-label="Previous Slide"
                   class="prev arrow"
+                  data-direction="prev"
                 >
                   &#10094;
                 </button>
@@ -175,6 +181,7 @@ export class PromoBar extends LitElement {
                   @click="${this.changeSlidePosition}"
                   aria-label="Next Slide"
                   class="next arrow"
+                  data-direction="next"
                 >
                   &#10095;
                 </button>
