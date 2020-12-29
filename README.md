@@ -1,12 +1,15 @@
 # \<promo-bar>
 
-A webcomponent to display promotions in an online store. This webcomponent follows the [open-wc](https://github.com/open-wc/open-wc) recommendation.
+A web component to display promotions in a carousel for an online store. This web component follows the [open-wc](https://github.com/open-wc/open-wc) recommendation.
 
-## Installation
+## Local Demo
 
 ```bash
-npm i promo-bar
+npm start
 ```
+
+To run a local development server that serves the basic demo located in `demo/index.html`
+
 
 ## Usage
 
@@ -15,67 +18,43 @@ npm i promo-bar
   import 'promo-bar/promo-bar.js';
 </script>
 
-<promo-bar></promo-bar>
+<promo-bar>
+  <!-- Provide messages as children of web component -->
+  <span>Promo Message</span>
+  <span>
+    <a href="#">Sales</a>
+    Another Promo Message
+  </span>
+</promo-bar>
+```
+## Documentation
+
+`<promo-bar>` can be styled and configured in a few ways to meet client needs.
+
+###### Attributes
+
+You can pass attributes `<promo-bar attribute></promobar>` to configure the web component.
+
+Attribute | Description
+- | -
+*hideButtons* | Hides the left and right arrow buttons to change promotion messages
+*autoCycleOff* | Stops automatically cycling through the messages
+
+###### CSS Variables
+
+`<promo-bar>` uses CSS variables for default styles to allow for styling from the outside.
+
+```css
+  /* declare CSS variables in your stylesheet to override default */
+  :root {
+    --text-color: red;
+  }
 ```
 
-## Linting with ESLint, Prettier, and Types
-
-To scan the project for linting errors, run
-
-```bash
-npm run lint
-```
-
-You can lint with ESLint and Prettier individually as well
-
-```bash
-npm run lint:eslint
-```
-
-```bash
-npm run lint:prettier
-```
-
-To automatically fix many linting errors, run
-
-```bash
-npm run format
-```
-
-You can format using ESLint and Prettier individually as well
-
-```bash
-npm run format:eslint
-```
-
-```bash
-npm run format:prettier
-```
-
-## Testing with Web Test Runner
-
-To run the suite of Web Test Runner tests, run
-
-```bash
-npm run test
-```
-
-To run the tests in watch mode (for <abbr title="test driven development">TDD</abbr>, for example), run
-
-```bash
-npm run test:watch
-```
-
-## Tooling configs
-
-For most of the tools, the configuration is in the `package.json` to reduce the amount of files in your project.
-
-If you customize the configuration a lot, you can consider moving them to individual files.
-
-## Local Demo with `web-dev-server`
-
-```bash
-npm start
-```
-
-To run a local development server that serves the basic demo located in `demo/index.html`
+CSS Variable | Description
+- | -
+*--text-color* | Variable to change color of promo messages. *Default: white*
+*--bg-color* | Variable to change background color of component. *Default: #232323*
+*--arrow-color* | Variable to change color of arrow buttons. *Default: white*
+*--promo-bar-height* | Variable to change height of component. *Default: 60px*
+*--font* | Variable to change font of messages. *Default: Arial, Roboto, sans-serif*
