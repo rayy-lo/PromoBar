@@ -87,8 +87,6 @@ export class PromoBar extends LitElement {
     this._totalSlides;
     this._intervalId;
 
-    console.log(this);
-
     // default config
     this.showButtons = true;
     this.autoCycle = true;
