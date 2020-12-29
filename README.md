@@ -36,7 +36,7 @@ To run a local development server that serves the basic demo located in `demo/in
 You can pass attributes `<promo-bar attribute></promobar>` to configure the web component.
 
 Attribute | Description
-- | -
+------- | -------
 *hideButtons* | Hides the left and right arrow buttons to change promotion messages
 *autoCycleOff* | Stops automatically cycling through the messages
 
@@ -52,7 +52,7 @@ Attribute | Description
 ```
 
 CSS Variable | Description
-- | -
+----- | -----
 *--text-color* | Variable to change color of promo messages. *Default: white*
 *--bg-color* | Variable to change background color of component. *Default: #232323*
 *--arrow-color* | Variable to change color of arrow buttons. *Default: white*
