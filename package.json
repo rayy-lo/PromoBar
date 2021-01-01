@@ -15,22 +15,29 @@
     "lint": "npm run lint:eslint && npm run lint:prettier",
     "format": "npm run format:eslint && npm run format:prettier",
     "test": "web-test-runner --coverage",
-    "test:watch": "web-test-runner --watch"
+    "test:watch": "web-test-runner --watch",
+    "build": "rimraf dist && rollup -c rollup.config.js",
+    "start:build": "npm run build && es-dev-server --root-dir dist --app-index index.html --compatibility none --open"
   },
   "dependencies": {
     "lit-html": "^1.1.2",
     "lit-element": "^2.2.1"
   },
   "devDependencies": {
-    "@web/dev-server": "^0.0.12",
-    "eslint": "^6.1.0",
+    "@open-wc/building-rollup": "^1.9.4",
     "@open-wc/eslint-config": "^4.0.0",
-    "prettier": "^2.0.4",
+    "@open-wc/testing": "^2.0.0",
+    "@web/dev-server": "^0.0.12",
+    "@web/test-runner": "^0.7.41",
+    "deepmerge": "^4.2.2",
+    "es-dev-server": "^2.0.2",
+    "eslint": "^6.1.0",
     "eslint-config-prettier": "^6.11.0",
     "husky": "^1.0.0",
     "lint-staged": "^10.0.0",
-    "@web/test-runner": "^0.7.41",
-    "@open-wc/testing": "^2.0.0"
+    "prettier": "^2.0.4",
+    "rimraf": "^3.0.2",
+    "rollup": "^2.35.1"
   },
   "eslintConfig": {
     "extends": [
