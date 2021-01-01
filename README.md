@@ -10,6 +10,18 @@ npm start
 
 To run a local development server that serves the basic demo located in `demo/index.html`
 
+```
+<custom-element-demo>
+  <template>
+    <link rel="import" href="my-element.html">
+    <next-code-block></next-code-block>
+  </template>
+</custom-element-demo>
+```
+
+```html
+<promo-bar></promo-bar>
+```
 
 ## Usage
 
@@ -27,6 +39,7 @@ To run a local development server that serves the basic demo located in `demo/in
   </span>
 </promo-bar>
 ```
+
 ## Documentation
 
 `<promo-bar>` can be styled and configured in a few ways to meet client needs.
@@ -35,26 +48,26 @@ To run a local development server that serves the basic demo located in `demo/in
 
 You can pass attributes `<promo-bar attribute></promobar>` to configure the web component.
 
-Attribute | Description
-- | -
-*hideButtons* | Hides the left and right arrow buttons to change promotion messages
-*autoCycleOff* | Stops automatically cycling through the messages
+| Attribute      | Description                                                         |
+| -------------- | ------------------------------------------------------------------- |
+| _hideButtons_  | Hides the left and right arrow buttons to change promotion messages |
+| _autoCycleOff_ | Stops automatically cycling through the messages                    |
 
 ###### CSS Variables
 
 `<promo-bar>` uses CSS variables for default styles to allow for styling from the outside.
 
 ```css
-  /* declare CSS variables in your stylesheet to override default */
-  :root {
-    --text-color: red;
-  }
+/* declare CSS variables in your stylesheet to override default */
+:root {
+  --text-color: red;
+}
 ```
 
-CSS Variable | Description
-- | -
-*--text-color* | Variable to change color of promo messages. *Default: white*
-*--bg-color* | Variable to change background color of component. *Default: #232323*
-*--arrow-color* | Variable to change color of arrow buttons. *Default: white*
-*--promo-bar-height* | Variable to change height of component. *Default: 60px*
-*--font* | Variable to change font of messages. *Default: Arial, Roboto, sans-serif*
+| CSS Variable         | Description                                                               |
+| -------------------- | ------------------------------------------------------------------------- |
+| _--text-color_       | Variable to change color of promo messages. _Default: white_              |
+| _--bg-color_         | Variable to change background color of component. _Default: #232323_      |
+| _--arrow-color_      | Variable to change color of arrow buttons. _Default: white_               |
+| _--promo-bar-height_ | Variable to change height of component. _Default: 60px_                   |
+| _--font_             | Variable to change font of messages. _Default: Arial, Roboto, sans-serif_ |
