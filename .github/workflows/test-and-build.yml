@@ -1,4 +1,4 @@
-name: PromoBar CI & CD
+name: Test and build component
 
 on:
   push:
@@ -7,3 +7,19 @@ on:
     branches: [master]
 
 jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Use Node.js 12
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+
+      - name: Test & Build
+        run: |
+          npm ci
+          npm run test
+          npm run build
