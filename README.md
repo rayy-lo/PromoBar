@@ -10,26 +10,9 @@ npm start
 
 To run a local development server that serves the basic demo located in `demo/index.html`
 
-```
-<custom-element-demo>
-  <template>
-    <link rel="import" href="my-element.html">
-    <next-code-block></next-code-block>
-  </template>
-</custom-element-demo>
-```
-
-```html
-<promo-bar></promo-bar>
-```
-
 ## Usage
 
 ```html
-<script type="module">
-  import 'promo-bar/promo-bar.js';
-</script>
-
 <promo-bar>
   <!-- Provide messages as children of web component -->
   <span>Promo Message</span>
@@ -64,10 +47,8 @@ You can pass attributes `<promo-bar attribute></promobar>` to configure the web 
 }
 ```
 
-| CSS Variable         | Description                                                               |
-| -------------------- | ------------------------------------------------------------------------- |
-| _--text-color_       | Variable to change color of promo messages. _Default: white_              |
-| _--bg-color_         | Variable to change background color of component. _Default: #232323_      |
-| _--arrow-color_      | Variable to change color of arrow buttons. _Default: white_               |
-| _--promo-bar-height_ | Variable to change height of component. _Default: 60px_                   |
-| _--font_             | Variable to change font of messages. _Default: Arial, Roboto, sans-serif_ |
+| CSS Variable         | Description                                                          |
+| -------------------- | -------------------------------------------------------------------- |
+| _--bg-color_         | Variable to change background color of component. _Default: #232323_ |
+| _--arrow-color_      | Variable to change color of arrow buttons. _Default: white_          |
+| _--promo-bar-height_ | Variable to change height of component. _Default: 60px_              |
